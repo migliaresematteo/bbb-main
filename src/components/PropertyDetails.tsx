@@ -117,7 +117,7 @@ const PropertyDetails: React.FC = () => {
   const carouselImages = property.Immagini_Carosello && property.Immagini_Carosello.length > 0
     ? property.Immagini_Carosello
     : property.Immagine_Copertina && property.Immagine_Copertina.length > 0
-      ? property.Immagine_Copertina
+      ? [property.Immagine_Copertina]
       : [];
 
   return (
@@ -302,12 +302,11 @@ const PropertyDetails: React.FC = () => {
                       </Button>
                     </a>
                   </div>
-                  </div>
-                  
-                  <div className="mt-4 pt-4 border-t border-gray-100 flex items-center text-sm text-gray-500">
-                    <CalendarClock className="h-4 w-4 mr-1.5" />
-                    Aggiornato il: {new Date(property.Data_Aggiornamento).toLocaleDateString('it-IT')}
-                  </div>
+                </div>
+                
+                <div className="mt-4 pt-4 border-t border-gray-100 flex items-center text-sm text-gray-500">
+                  <CalendarClock className="h-4 w-4 mr-1.5" />
+                  Aggiornato il: {new Date(property.Data_Aggiornamento).toLocaleDateString('it-IT')}
                 </div>
               </div>
             </div>
