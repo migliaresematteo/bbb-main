@@ -291,37 +291,17 @@ const PropertyDetails: React.FC = () => {
                       </Button>
                     </a>
                     
-                    <Button variant="outline" className="w-full flex items-center justify-center gap-2">
-                      <Share2 className="h-4 w-4" />
-                      Condividi
-                    </Button>
+                    <a 
+                      href="https://tally.so/r/wA4e2y"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full"
+                    >
+                      <Button className="w-full bg-primary hover:bg-primary/90 text-white font-medium py-2.5 flex items-center justify-center gap-2">
+                        Richiedi Informazioni
+                      </Button>
+                    </a>
                   </div>
-
-                  {/* Tally.so Contact Form */}
-                  <div className="mt-6 pt-6 border-t border-gray-100">
-                    <h3 className="text-lg font-semibold mb-4">Richiedi Informazioni</h3>
-                    <iframe 
-                      data-tally-src="https://tally.so/embed/wA4e2y?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" 
-                      loading="lazy" 
-                      width="100%" 
-                      height="692" 
-                      frameBorder="0" 
-                      marginHeight="0" 
-                      marginWidth="0" 
-                      title="Informazioni immobile"
-                    />
-                    <script
-                      dangerouslySetInnerHTML={{
-                        __html: `
-                          var d=document,w="https://tally.so/widgets/embed.js",v=function(){
-                            "undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach((function(e){e.src=e.dataset.tallySrc}))
-                          };
-                          if("undefined"!=typeof Tally)v();else if(d.querySelector('script[src="'+w+'"]')==null){
-                            var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);
-                          }
-                        `
-                      }}
-                    />
                   </div>
                   
                   <div className="mt-4 pt-4 border-t border-gray-100 flex items-center text-sm text-gray-500">
