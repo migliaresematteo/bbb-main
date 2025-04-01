@@ -448,7 +448,17 @@ const PropertyDetails: React.FC = () => {
           </div>
         </div>
       </main>
-      
+
+      {/* Featured Properties Section */}
+      <div className="bg-gray-50 py-16">
+        <FeaturedProperties
+          title="Altri Immobili"
+          subtitle="Scopri altre proprietà che potrebbero interessarti"
+          limit={3}
+          excludePropertyId={property.id}
+        />
+      </div>
+
       <Footer />
     </div>
   );

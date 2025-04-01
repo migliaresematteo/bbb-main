@@ -7,14 +7,17 @@ interface FeaturedPropertiesProps {
   title?: string;
   subtitle?: string;
   limit?: number;
+  excludePropertyId?: number;
 }
 
 const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
   title = 'Immobili in Evidenza',
   subtitle = 'Scopri le nostre proprietà selezionate con cura per te',
-  limit = 3
+  limit = 3,
+  excludePropertyId
 }) => {
   const { properties, loading, error } = useProperties(1, limit, true, true);
+  const filteredProperties = properties.filter(prop => prop.id !== excludePropertyId);
 
   // Log the data received from Strapi for debugging
   useEffect(() => {
@@ -39,8 +42,8 @@ const FeaturedProperties: React.FC<FeaturedPropertiesProps> = ({
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {properties.length > 0 ? (
-              properties.map((property) => (
+            {filteredProperties.length > 0 ? (
+              filteredProperties.map((property) => (
                 <PropertyCard key={property.id} property={property} />
               ))
             ) : (
