@@ -6,6 +6,7 @@ import {
   Loader2, ArrowLeft, MapPin, Home, Ruler, Bath, Building, 
   Car, Thermometer, Wind, CalendarClock, Euro, Share2 
 } from 'lucide-react';
+import FeaturedProperties from './FeaturedProperties';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious, type CarouselApi } from './ui/carousel';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
