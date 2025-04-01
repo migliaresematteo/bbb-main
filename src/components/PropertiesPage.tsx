@@ -47,6 +47,11 @@ const MIN_PRICE = 0;
 const MAX_PRICE = 2000000;
 const PRICE_STEP = 10000;
 
+// Surface area range constants
+const MIN_SURFACE = 0;
+const MAX_SURFACE = 1000;
+const SURFACE_STEP = 5;
+
 // Sorting options
 type SortOption = {
   value: string;
@@ -93,6 +98,8 @@ const PropertiesPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [propertyType, setPropertyType] = useState<string>('all');
   const [priceRange, setPriceRange] = useState<[number, number]>([MIN_PRICE, MAX_PRICE]);
+  const [metratureRange, setMetratureRange] = useState<[number, number]>([0, 1000]);
+  const [city, setCity] = useState<string>('all');
   const [rooms, setRooms] = useState<string>('all');
   const [bathrooms, setBathrooms] = useState<string>('all');
   const [sortBy, setSortBy] = useState<string>('date-desc');
@@ -128,6 +135,18 @@ const PropertiesPage: React.FC = () => {
           property.Tipologia === propertyType
         );
       }
+      
+      // Filter by city
+      if (city && city !== 'all') {
+        filtered = filtered.filter(property => 
+          property.Citta === city
+        );
+      }
+      
+      // Filter by metrature range
+      filtered = filtered.filter(property => 
+        property.Superficie >= metratureRange[0] && property.Superficie <= metratureRange[1]
+      );
       
       // Filter by price range
       filtered = filtered.filter(property => 
@@ -174,10 +193,20 @@ const PropertiesPage: React.FC = () => {
     ? ['all', ...new Set(properties.map(property => property.Tipologia))]
     : ['all'];
     
+  // Get unique cities for the filter dropdown
+  const cities = properties.length > 0
+    ? ['all', ...new Set(properties.map(property => property.Citta))]
+    : ['all'];
+    
   // Get unique room counts for the filter dropdown
   const roomCounts = properties.length > 0
     ? ['all', ...new Set(properties.map(property => property.Numero_Locali.toString()))]
     : ['all'];
+    
+  // Get min and max metrature for the slider
+  const surfaceAreaRange = properties.length > 0
+    ? [0, Math.max(...properties.map(property => property.Superficie))]
+    : [0, 1000];
     
   // Get unique bathroom counts for the filter dropdown
   const bathroomCounts = properties.length > 0
@@ -328,18 +357,33 @@ const PropertiesPage: React.FC = () => {
                     {/* Property Type Filter */}
                     <div>
                       <label className="text-sm font-medium mb-2 block">Tipologia</label>
-                      <Select value={propertyType} onValueChange={setPropertyType}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Tutte le tipologie" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {propertyTypes.map((type) => (
-                            <SelectItem key={type} value={type}>
-                              {type === 'all' ? 'Tutte le tipologie' : type}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
+                      <div className="space-y-4">
+                        <Select value={propertyType} onValueChange={setPropertyType}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Tipo di immobile" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {propertyTypes.map((type, index) => (
+                              <SelectItem key={index} value={type}>
+                                {type === 'all' ? 'Tutti i tipi' : type}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+
+                        <Select value={city} onValueChange={setCity}>
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Città" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {cities.map((cityOption, index) => (
+                              <SelectItem key={index} value={cityOption}>
+                                {cityOption === 'all' ? 'Tutte le città' : cityOption}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
                     </div>
                     
                     {/* Price Range Filter */}
@@ -357,6 +401,25 @@ const PropertiesPage: React.FC = () => {
                         step={PRICE_STEP}
                         onValueChange={(value) => setPriceRange(value as [number, number])}
                         className="mt-2"
+                        minStepsBetweenThumbs={1}
+                      />
+                    </div>
+                    
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <label className="text-sm font-medium">Superficie (m²)</label>
+                        <span className="text-sm text-gray-500">
+                          {metratureRange[0]} - {metratureRange[1]} m²
+                        </span>
+                      </div>
+                      <Slider
+                        value={metratureRange}
+                        min={MIN_SURFACE}
+                        max={MAX_SURFACE}
+                        step={SURFACE_STEP}
+                        onValueChange={(value) => setMetratureRange(value as [number, number])}
+                        className="mt-2"
+                        minStepsBetweenThumbs={1}
                       />
                     </div>
                     

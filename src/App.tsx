@@ -3,7 +3,7 @@ import { useRoutes, Routes, Route } from "react-router-dom";
 import Home from "./components/home";
 import PropertiesPage from "./components/PropertiesPage";
 import PropertyDetails from "./components/PropertyDetails";
-import routes from "tempo-routes";
+
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path="/properties" element={<PropertiesPage/>} />
           <Route path="/property/:id" element={<PropertyDetails/>} />
         </Routes>
-        {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
+        
       </>
     </Suspense>
   );

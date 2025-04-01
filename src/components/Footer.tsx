@@ -124,6 +124,16 @@ const Footer = () => {
 
         <Separator className="my-8 bg-slate-700" />
 
+        <div className="w-full flex justify-center mb-8">
+          <Button
+            size="lg"
+            className="bg-white text-slate-900 hover:bg-white/90"
+            onClick={() => window.open('https://tally.so/r/w2lZMV', '_blank')}
+          >
+            Contattaci
+          </Button>
+        </div>
+
         <div className="flex flex-col md:flex-row justify-center items-center">
           <p className="text-slate-400 text-sm">
             {currentYear} BrickByBrick. Tutti i diritti riservati.
