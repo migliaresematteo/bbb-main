@@ -144,14 +144,18 @@ const PropertiesPage: React.FC = () => {
       }
       
       // Filter by metrature range
-      filtered = filtered.filter(property => 
-        property.Superficie >= metratureRange[0] && property.Superficie <= metratureRange[1]
-      );
+      if (metratureRange[0] > 0 || metratureRange[1] < MAX_SURFACE) {
+        filtered = filtered.filter(property => 
+          property.Superficie >= metratureRange[0] && property.Superficie <= metratureRange[1]
+        );
+      }
       
       // Filter by price range
-      filtered = filtered.filter(property => 
-        property.Prezzo >= priceRange[0] && property.Prezzo <= priceRange[1]
-      );
+      if (priceRange[0] > MIN_PRICE || priceRange[1] < MAX_PRICE) {
+        filtered = filtered.filter(property => 
+          property.Prezzo >= priceRange[0] && property.Prezzo <= priceRange[1]
+        );
+      }
       
       // Filter by rooms (using Numero_Locali instead of Numero_Camere)
       if (rooms && rooms !== 'all') {
@@ -171,7 +175,7 @@ const PropertiesPage: React.FC = () => {
     } else {
       setFilteredProperties([]);
     }
-  }, [properties, searchTerm, propertyType, priceRange, rooms, bathrooms]);
+  }, [properties, searchTerm, propertyType, priceRange, metratureRange, city, rooms, bathrooms]);
 
   // Sort properties when filteredProperties or sortBy changes
   useEffect(() => {
