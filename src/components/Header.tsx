@@ -32,6 +32,7 @@ const Header = ({
   navItems = [
     { label: "Home", href: "/" },
     { label: "Immobili", href: "/properties" },
+    { label: "Chi siamo", href: "/chi-siamo" },
   ],
 }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

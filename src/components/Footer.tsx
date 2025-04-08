@@ -37,6 +37,14 @@ const Footer = () => {
                   Proprietà
                 </Link>
               </li>
+              <li>
+                <Link
+                  to="/chi-siamo"
+                  className="text-slate-300 hover:text-white transition-colors"
+                >
+                  Chi Siamo
+                </Link>
+              </li>
             </ul>
           </div>
 
