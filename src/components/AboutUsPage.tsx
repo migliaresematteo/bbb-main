@@ -434,6 +434,47 @@ const AboutUsPage: React.FC = () => {
         </section>
       </main>
 
+      {/* Call to Action Section */}
+      <section className="py-24 px-4 md:px-8 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="space-y-8"
+          >
+            <h2 className="text-4xl font-bold text-gray-900">
+              Pronti a iniziare il vostro percorso immobiliare?
+            </h2>
+            <p className="max-w-2xl mx-auto text-gray-600 text-lg leading-relaxed">
+              Che stiate cercando la casa dei vostri sogni o desideriate vendere il vostro immobile, 
+              siamo qui per guidarvi in ogni passo del percorso.
+            </p>
+            <div className="flex justify-center gap-4">
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-white px-8"
+                onClick={() => window.open('https://tally.so/r/w2lZMV', '_blank')}
+              >
+                Contattaci ora
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="px-8"
+                asChild
+              >
+                <Link to="/properties">
+                  Esplora le proprietà
+                </Link>
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Footer */}
       <Footer />
     </div>
